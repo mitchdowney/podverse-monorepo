@@ -63,7 +63,7 @@ jobs:
           # Get base version from package.json (strip any existing suffix)
           BASE_VERSION=$(node -p "require('./package.json').version" | sed 's/-.*//')
           # Use web-deploy-podcastdj-alpha as reference image for version calculation
-          IMAGE_PATH="mitchdowney/podverse-monorepo/web-deploy-podcastdj-alpha"
+          IMAGE_PATH="${{ github.repository }}/web-deploy-podcastdj-alpha"
 
           echo "Base version: $BASE_VERSION"
           echo "Reference image path: $IMAGE_PATH"
@@ -129,10 +129,7 @@ jobs:
           push: true
           build-args: ENV_FILE=apps/web/env/alpha-podverse.k.podcastdj.com.env
           tags: |
-            ghcr.io/mitchdowney/podverse-monorepo/web-deploy-podcastdj-alpha:${{ steps.version.outputs.VERSION }}
-            ghcr.io/mitchdowney/podverse-monorepo/web-deploy-podcastdj-alpha:alpha
-          labels: |
-            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
-            org.opencontainers.image.revision=${{ github.sha }}
+            ghcr.io/${{ github.repository }}/web-deploy-podcastdj-alpha:${{ steps.version.outputs.VERSION }}
+            ghcr.io/${{ github.repository }}/web-deploy-podcastdj-alpha:alpha
           cache-from: type=gha
           cache-to: type=gha,mode=max
