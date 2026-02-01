@@ -2,7 +2,7 @@
 
 #### Prompt (Developer)
 
-look at 
+look at
 
 https://github.com/podverse/podverse
 
